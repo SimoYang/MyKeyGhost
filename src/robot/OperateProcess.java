@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import ToObjectUtil.Name
 import ToObjectUtil.ProcessBean;
 
 public class OperateProcess {
@@ -66,10 +67,26 @@ public class OperateProcess {
 			}
 		}
 		//处理键盘输入的接口
-		public void OperateKeyP(String s){
-			int s1=key.get(s);
-			r.keyPress(s1);
+		public void operateKeyP(String[] s,boolean flag){
+				for (String temp:s ) {
+					int tempInt=Integer.parseInt(temp);
+					r.keyPress(tempInt);
+				}
+				if (flag) {
+					for (String temp :s ) {
+						int tempInt=Integer.parseInt(temp);
+						r.keyRelease(tempInt);
+					}
+				}
 		}
+		//处理鼠标输入的接口
+		public operateMouse(int[] r,Name name){
+			
+			if(name=Name.MOUSEBUTTON1){
+
+			}
+		}
+
 		//
-		
+
 }
