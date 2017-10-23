@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import ToObjectUtil.Name
+import ToObjectUtil.NAME;
 import ToObjectUtil.ProcessBean;
 
 public class OperateProcess {
@@ -14,7 +14,7 @@ public class OperateProcess {
 		static Map<String,Integer> key;
 		//创建一个包含所有KeyCode的Map
 		static{
-		    key=new HashMap<>();
+		  key=new HashMap<>();
 			key.put("SHIFT", KeyEvent.VK_SHIFT);
 			key.put("CTRL", KeyEvent.VK_CONTROL);
 			key.put("TAB",KeyEvent.VK_TAB);
@@ -80,8 +80,8 @@ public class OperateProcess {
 				}
 		}
 		//处理鼠标输入的接口
-		public operateMouse(int[] r,Name name){
-			
+		public void operateMouse(int[] r,Name name){
+
 			if(name=Name.MOUSEBUTTON1){
 
 			}
