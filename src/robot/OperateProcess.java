@@ -2,19 +2,23 @@ package robot;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import ToObjectUtil.NAME;
+
+import ToObjectUtil.Name;
 import ToObjectUtil.ProcessBean;
+import ToObjectUtil.MyKeys;
 
 public class OperateProcess {
 		Robot r;
 		static Map<String,Integer> key;
 		//创建一个包含所有KeyCode的Map
 		static{
-		  key=new HashMap<>();
+		    key=new HashMap<>();
 			key.put("SHIFT", KeyEvent.VK_SHIFT);
 			key.put("CTRL", KeyEvent.VK_CONTROL);
 			key.put("TAB",KeyEvent.VK_TAB);
@@ -57,6 +61,17 @@ public class OperateProcess {
 			key.put("8", KeyEvent.VK_8);
 			key.put("9", KeyEvent.VK_9);
 		}
+		//调度鼠标和键盘输出的函数
+		public void charge(ArrayList<MyKeys> p,int i){
+			for(i--;(i+1)<p.size();i++){
+				MyKeys k=p.get(i);
+				if(k.name==Name.KEYCOMBINE){
+					operateKeyP(k.keys,k.flag);
+				}else{
+					operateMouse(k.point,k.name);
+				}
+			}
+		}
 		//初始化OperateProcess
 		public OperateProcess(){
 			try {
@@ -66,25 +81,34 @@ public class OperateProcess {
 				e.printStackTrace();
 			}
 		}
-		//处理键盘输入的接口
+		//处理键盘输入的接口,flag代表是否要放开所按下的键
 		public void operateKeyP(String[] s,boolean flag){
 				for (String temp:s ) {
-					int tempInt=Integer.parseInt(temp);
+					int tempInt=key.get(temp);
 					r.keyPress(tempInt);
 				}
 				if (flag) {
 					for (String temp :s ) {
-						int tempInt=Integer.parseInt(temp);
+						int tempInt=key.get(temp);
 						r.keyRelease(tempInt);
 					}
 				}
 		}
 		//处理鼠标输入的接口
 		public void operateMouse(int[] r,Name name){
-
-			if(name=Name.MOUSEBUTTON1){
-
+			if(r!=null){
+				this.r.mouseMove(r[0], r[1]);
 			}
+			if(name==Name.MOUSEBUTTON1){
+				this.r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+				this.r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+			}else if(name==Name.MOUSEBUTTON2){
+				this.r.mousePress(InputEvent.BUTTON2_DOWN_MASK);
+				this.r.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
+			}else if(name==Name.MOUSESCROLL){
+				this.r.mouseWheel(InputEvent.BUTTON3_DOWN_MASK);
+			}
+			
 		}
 
 		//
