@@ -61,9 +61,13 @@ public class OperateProcess {
 			key.put("8", KeyEvent.VK_8);
 			key.put("9", KeyEvent.VK_9);
 		}
-		//调度鼠标和键盘输出的函数
-		public void charge(ArrayList<MyKeys> p,int i){
-			for(i--;(i+1)<p.size();i++){
+		//对ProcessBean进行解析的方法
+		public void analyze(ProcessBean temp){
+			
+		}
+		//调度鼠标和键盘循环的函数
+		public void charge(ArrayList<MyKeys> p,int i,int e){
+			for(i--;(i+1)<e;i++){
 				MyKeys k=p.get(i);
 				if(k.name==Name.KEYCOMBINE){
 					operateKeyP(k.keys,k.flag);
